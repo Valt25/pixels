@@ -2,9 +2,11 @@ package ru.simbirsoft.summerintensive.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "pixels")
 public class Pixel {
 
     @Id
