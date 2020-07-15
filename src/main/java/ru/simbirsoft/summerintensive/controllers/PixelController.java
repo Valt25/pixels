@@ -19,7 +19,7 @@ public class PixelController {
     }
 
     @GetMapping("/pixels")
-    public List<Pixel> sayHello() {
-        return pixelService.readAll();
+    public List<Pixel> pixelsList() {
+        return pixelService.readLastPixels();
     }
 }

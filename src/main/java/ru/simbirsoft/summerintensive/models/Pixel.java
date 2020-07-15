@@ -13,15 +13,8 @@ public class Pixel {
     private Long id;
     private int x;
     private int y;
+    private String color;
     private Timestamp created;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public int getX() {
         return x;
@@ -39,11 +32,11 @@ public class Pixel {
         this.y = y;
     }
 
-    public Timestamp getCreated() {
-        return created;
+    public String getColor() {
+        return color;
     }
 
-    public void setCreated(Timestamp created) {
-        this.created = created;
+    public void setColor(String color) {
+        this.color = color;
     }
 }
