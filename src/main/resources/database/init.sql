@@ -4,3 +4,13 @@ CREATE TABLE IF NOT EXISTS pixels (
     y INTEGER NOT NULL ,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY ,
+    email TEXT NOT NULL ,
+    password TEXT NOT NULL ,
+    name TEXT ,
+    city TEXT ,
+    country TEXT,
+    isAdmin BOOLEAN DEFAULT FALSE
+);
