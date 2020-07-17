@@ -1,9 +1,9 @@
 package ru.simbirsoft.summerintensive.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.simbirsoft.summerintensive.models.Pixel;
+import ru.simbirsoft.summerintensive.repository.PixelRepository;
 import ru.simbirsoft.summerintensive.services.interfaces.IPixelService;
 
 import java.util.List;
@@ -12,14 +12,21 @@ import java.util.List;
 public class PixelController {
 
     private final IPixelService pixelService;
-
+    private final PixelRepository pixelRepo;
     @Autowired
-    public PixelController(IPixelService pixelService) {
+    public PixelController(IPixelService pixelService, PixelRepository pixelRepo) {
         this.pixelService = pixelService;
+        this.pixelRepo = pixelRepo;
     }
 
     @GetMapping("/pixels")
-    public List<Pixel> sayHello() {
-        return pixelService.readAll();
+    public List<Pixel> pixelsList() {
+        return pixelService.readLastPixels();
     }
+
+    @PostMapping("/v1/cell/put")
+    public Pixel fillPixel(@RequestBody Pixel pixel){
+        return pixelService.storePixel(pixel);
+    }
+
 }

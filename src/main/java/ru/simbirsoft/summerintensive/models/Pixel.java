@@ -1,8 +1,10 @@
 package ru.simbirsoft.summerintensive.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -10,9 +12,12 @@ import java.sql.Timestamp;
 public class Pixel {
 
     @Id
+    @GeneratedValue
     private Long id;
     private int x;
     private int y;
+    private String color;
+    private Date date;
     private Timestamp created;
 
     public Long getId() {
@@ -45,5 +50,13 @@ public class Pixel {
 
     public void setCreated(Timestamp created) {
         this.created = created;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
