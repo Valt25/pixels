@@ -5,5 +5,8 @@ import ru.simbirsoft.summerintensive.models.Pixel;
 import java.util.List;
 
 public interface IPixelService {
-    List<Pixel> readAll();
+    List<Pixel> readLastPixels();
+
+
+    Pixel storePixel(Pixel pixel);
 }
