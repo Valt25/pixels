@@ -21,7 +21,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
         // преобразуем запрос в HTTP
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         // получаем токен
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("Authentication_token");
         // создаем объект аутентификации
         Authentication authentication = new JwtAuthentication(token);
         // кладем его в контекст для текущего потока
