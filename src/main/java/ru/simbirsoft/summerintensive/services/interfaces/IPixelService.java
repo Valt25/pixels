@@ -7,6 +7,6 @@ import ru.simbirsoft.summerintensive.models.User;
 import java.util.List;
 
 public interface IPixelService {
-    List<Pixel> readAll();
+    List<Pixel> readLastPixels();
     void create(User user, PixelDto pixelDto);
 }

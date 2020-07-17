@@ -24,8 +24,8 @@ public class PixelServiceImpl implements IPixelService {
     }
 
     @Override
-    public List<Pixel> readAll() {
-        return this.pixelRepository.findAll();
+    public List<Pixel> readLastPixels() {
+        return this.pixelRepository.findAllWithMaxCreated();
     }
 
     @Autowired

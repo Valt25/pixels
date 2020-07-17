@@ -50,7 +50,7 @@ public class PixelController {
             left_time = 0;
         }
         PixelListResponse resp = PixelListResponse.builder()
-                .pixels(PixelDto.from(pixelService.readAll()))
+                .pixels(PixelDto.from(pixelService.readLastPixels()))
                 .rollback_time(left_time)
                 .build();
         return ResponseEntity.ok(resp);
