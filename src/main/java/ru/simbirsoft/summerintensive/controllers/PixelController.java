@@ -18,7 +18,7 @@ public class PixelController {
         this.pixelService = pixelService;
         this.pixelRepo = pixelRepo;
     }
-
+//
     @GetMapping("/pixels")
     public List<Pixel> pixelsList() {
         return pixelService.readLastPixels();
