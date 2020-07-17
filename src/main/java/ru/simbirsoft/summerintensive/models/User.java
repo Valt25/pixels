@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -32,6 +33,8 @@ public class User implements Serializable, Comparable<User> {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    private LocalDateTime lastColorTime;
 
     @Override
     public int compareTo(User o) {

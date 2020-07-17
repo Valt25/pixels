@@ -40,6 +40,7 @@ public class SignUpServiceImpl implements SignUpService {
                 .city(form.getCity())
                 .state(State.CONFIRMED)
                 .role(Role.USER)
+                .lastColorTime(LocalDateTime.now())
                 .build();
 
         usersRepository.save(user);
