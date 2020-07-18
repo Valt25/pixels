@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface PixelRepository extends JpaRepository<Pixel, Long> {
     @Query(nativeQuery = true,
-            value = "SELECT p.id as id, p.created as created, p.x as x, p.y as y, p.color FROM pixels p join (" +
+            value = "SELECT * FROM pixels p join (" +
             "SELECT x, y, MAX(created) as created FROM pixels " +
             "GROUP BY x, y" +
                   ") as aggregated ON p.x = aggregated.x and p.y = aggregated.y and p.created = aggregated.created")
