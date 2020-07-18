@@ -1,26 +1,41 @@
 package ru.simbirsoft.summerintensive.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "pixels")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pixel {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private int x;
     private int y;
-    private Timestamp created;
+    private String color;
+    private LocalDateTime created;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    private User user;
+
+    public String getColor() {
+        return color;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User getUser() {
+        return  user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getX() {
@@ -39,11 +54,11 @@ public class Pixel {
         this.y = y;
     }
 
-    public Timestamp getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(Timestamp created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 }
