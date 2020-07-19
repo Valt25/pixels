@@ -23,7 +23,7 @@ public class Pixel {
     private String color;
     private LocalDateTime created;
 
-    @ManyToOne
+    @ManyToOne // много пикселей в одном юзере
     private User user;
 
     public String getColor() {

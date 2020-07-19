@@ -1,4 +1,4 @@
-package ru.simbirsoft.summerintensive.handlers;
+package ru.simbirsoft.summerintensive.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
