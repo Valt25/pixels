@@ -60,7 +60,7 @@ public class PixelController {
         if (left_time < 0) {
             left_time = 0;
         }
-        if (left_time  > 0) {
+        if (left_time > 0) {
             PutErrorDto err = PutErrorDto.builder().time_left(left_time).build();
             return ResponseEntity.badRequest().body(err);
         }
@@ -71,7 +71,7 @@ public class PixelController {
     // посмотреть статистику по стране
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/v1/admin/statistic/country/{countryName}")
-    public ResponseEntity getCountriesStat(@PathVariable String countryName){
+    public ResponseEntity getCountriesStat(@PathVariable String countryName) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
         User user = userService.findByEmail(userDetails.getUsername());
@@ -94,7 +94,7 @@ public class PixelController {
     // посмотреть статистику по городу
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/v1/admin/statistic/city/{cityName}")
-    public ResponseEntity getCityStat(@PathVariable String cityName){
+    public ResponseEntity getCityStat(@PathVariable String cityName) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
         User user = userService.findByEmail(userDetails.getUsername());
@@ -103,8 +103,7 @@ public class PixelController {
         }
 
         long _usersCount = userService.countByCity(cityName);
-        long _cellsCount = pixelService.findByUser(user).size();
-        _cellsCount = pixelService.countActualByUsersCity(cityName);
+        long _cellsCount = pixelService.countActualByUsersCity(cityName);
         long _allCellsCount = pixelService.countTotalByUsersCity(cityName);
         StatisticResponse resp = StatisticResponse.builder().
                 allCellsCount(_allCellsCount).
@@ -117,7 +116,7 @@ public class PixelController {
     // посмотреть статистику по пользователю
     @PreAuthorize("isAuthenticated()")
     @GetMapping(value = "/v1/admin/statistic/user/{email}")
-    public ResponseEntity getUserStat(@PathVariable String email){
+    public ResponseEntity getUserStat(@PathVariable String email) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
         User user = userService.findByEmail(userDetails.getUsername());

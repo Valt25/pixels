@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Entity
@@ -23,7 +22,7 @@ public class Pixel {
     private String color;
     private LocalDateTime created;
 
-    @ManyToOne // много пикселей в одном юзере
+    @ManyToOne
     private User user;
 
     public String getColor() {
