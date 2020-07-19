@@ -17,10 +17,9 @@ public interface PixelRepository extends JpaRepository<Pixel, Long> {
                   ") as aggregated ON p.x = aggregated.x and p.y = aggregated.y and p.created = aggregated.created")
     List<Pixel> findAllWithMaxCreated(); // показ текущих пикселей
 
-//
+
     List<Pixel> findByUser(User user);
     long countPixelsByUserCountry(String countryName);
     long countPixelsByUserCity(String cityName);
     long countPixelsByUser(String email);
-
 }
