@@ -24,7 +24,6 @@ public class User implements Serializable, Comparable<User> {
     private String email;
     private String country;
     private String city;
-    private long cellsPainted; //дебаг
 
     private String hashPassword;
 
@@ -36,14 +35,6 @@ public class User implements Serializable, Comparable<User> {
 
     private LocalDateTime lastColorTime;
 
-    public long getCellsPainted() {
-        return cellsPainted;
-    } // дебаг
-
-    public void setCellsPainted(long cellsPainted) {
-        this.cellsPainted = cellsPainted;
-    } // дебаг
-    public void incCellsPainted(){cellsPainted++;} // дебаг
     @Override
     public int compareTo(User o) {
         return (int) (id - o.id);

@@ -41,7 +41,6 @@ public class PixelServiceImpl implements IPixelService {
                 .build();
         pixelRepository.save(pixel);
         user.setLastColorTime(LocalDateTime.now());
-        user.incCellsPainted(); // увеличить счётчик кол-ва закрашенных ячеек
         usersRepository.save(user);
     }
 
