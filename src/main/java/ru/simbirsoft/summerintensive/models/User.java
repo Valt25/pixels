@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,7 +25,6 @@ public class User implements Serializable, Comparable<User> {
     private String email;
     private String country;
     private String city;
-    private long cellsPainted; //дебаг
 
     private String hashPassword;
 
@@ -36,17 +36,9 @@ public class User implements Serializable, Comparable<User> {
 
     private LocalDateTime lastColorTime;
 
-    public long getCellsPainted() {
-        return cellsPainted;
-    } // дебаг
-
-    public void setCellsPainted(long cellsPainted) {
-        this.cellsPainted = cellsPainted;
-    } // дебаг
-    public void incCellsPainted(){cellsPainted++;} // дебаг
     @Override
     public int compareTo(User o) {
-        return (int) (id - o.id);
+        return (int)(id - o.id);
     }
 
     @Override
