@@ -65,7 +65,7 @@ public class PixelController {
         if (left_time < 0) {
             left_time = 0;
         }
-        if (left_time  > 0) {
+        if (left_time > 0) {
             PutErrorDto err = PutErrorDto.builder().time_left(left_time).build();
             return ResponseEntity.badRequest().body(err);
         }
@@ -73,4 +73,72 @@ public class PixelController {
         webSocketMessagesHandler.sendPixel(form);
         return ResponseEntity.ok().build();
     }
+
+    // посмотреть статистику по стране
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(value = "/v1/admin/statistic/country/{countryName}")
+    public ResponseEntity getCountriesStat(@PathVariable String countryName) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
+        User user = userService.findByEmail(userDetails.getUsername());
+        if (user.getRole() != Role.ADMIN) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        long _usersCount = userService.countByCountry(countryName);
+        long _cellsCount = pixelService.findByUser(user).size();
+        _cellsCount = pixelService.countActualByUsersCountry(countryName);
+        long _allCellsCount = pixelService.countTotalByUsersCountry(countryName);
+        StatisticResponse resp = StatisticResponse.builder().
+                usersCount(_usersCount).
+                cellsCount(_cellsCount).
+                allCellsCount(_allCellsCount).
+                build();
+        return ResponseEntity.ok(resp);
+    }
+
+    // посмотреть статистику по городу
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(value = "/v1/admin/statistic/city/{cityName}")
+    public ResponseEntity getCityStat(@PathVariable String cityName) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
+        User user = userService.findByEmail(userDetails.getUsername());
+        if (user.getRole() != Role.ADMIN) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        long _usersCount = userService.countByCity(cityName);
+        long _cellsCount = pixelService.countActualByUsersCity(cityName);
+        long _allCellsCount = pixelService.countTotalByUsersCity(cityName);
+        StatisticResponse resp = StatisticResponse.builder().
+                allCellsCount(_allCellsCount).
+                cellsCount(_cellsCount).
+                usersCount(_usersCount).
+                build();
+        return ResponseEntity.ok(resp);
+    }
+
+    // посмотреть статистику по пользователю
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping(value = "/v1/admin/statistic/user/")
+    public ResponseEntity getUserStat(@RequestParam String email) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
+        User user = userService.findByEmail(userDetails.getUsername());
+        if (user.getRole() != Role.ADMIN) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        User user1 = userService.findByEmail(email);
+
+        long _cellsCount = pixelService.countActualByUser(email);
+        long _allCellsCount = pixelService.findByUser(user1).size();
+        UserStatisticResponse resp = UserStatisticResponse.builder().
+                history(PixelHistoryDto.from(pixelService.findByUser(user1))).
+                allCellsCount(_allCellsCount).
+                cellsCount(_cellsCount).
+                build();
+        return ResponseEntity.ok(resp);
+    }
+
 }
