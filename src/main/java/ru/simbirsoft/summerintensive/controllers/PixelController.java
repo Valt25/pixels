@@ -116,8 +116,8 @@ public class PixelController {
 
     // посмотреть статистику по пользователю
     @PreAuthorize("isAuthenticated()")
-    @GetMapping(value = "/v1/admin/statistic/user/{email}")
-    public ResponseEntity getUserStat(@PathVariable String email){
+    @GetMapping(value = "/v1/admin/statistic/user/")
+    public ResponseEntity getUserStat(@RequestParam String email){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
         User user = userService.findByEmail(userDetails.getUsername());
