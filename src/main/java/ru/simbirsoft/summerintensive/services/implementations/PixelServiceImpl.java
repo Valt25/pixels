@@ -89,7 +89,7 @@ public class PixelServiceImpl implements IPixelService {
         long counter=0;
         List<Pixel> actualPixels = readLastPixels(); // список актуальных пикселей
         for(Pixel p: actualPixels){
-            if(p.getUser().getName().equals(email))
+            if(p.getUser().getEmail().equals(email))
                 counter++;
         }
         return counter;
