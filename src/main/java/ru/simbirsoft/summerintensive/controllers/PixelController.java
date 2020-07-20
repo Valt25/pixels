@@ -118,20 +118,20 @@ public class PixelController {
 
     // посмотреть статистику по пользователю
     @PreAuthorize("isAuthenticated()")
-    @GetMapping(value = "/v1/admin/statistic/user/")
+    @GetMapping(value = "/v1/admin/statistic/user")
     public ResponseEntity getUserStat(@RequestParam String email) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getDetails();
-        User user = userService.findByEmail(userDetails.getUsername());
-        if (user.getRole() != Role.ADMIN) {
+        User currentUser = userService.findByEmail(userDetails.getUsername());
+        if (currentUser.getRole() != Role.ADMIN) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-        User user1 = userService.findByEmail(email);
+        User user = userService.findByEmail(email);
 
         long _cellsCount = pixelService.countActualByUser(email);
-        long _allCellsCount = pixelService.findByUser(user1).size();
+        long _allCellsCount = pixelService.findByUser(user).size();
         UserStatisticResponse resp = UserStatisticResponse.builder().
-                history(PixelHistoryDto.from(pixelService.findByUser(user1))).
+                history(PixelHistoryDto.from(pixelService.findByUser(user))).
                 allCellsCount(_allCellsCount).
                 cellsCount(_cellsCount).
                 build();
