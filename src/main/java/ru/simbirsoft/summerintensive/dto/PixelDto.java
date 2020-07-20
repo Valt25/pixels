@@ -31,4 +31,5 @@ public class PixelDto {
                 .map(PixelDto::from)
                 .collect(Collectors.toList());
     }
+
 }

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
@@ -38,7 +37,7 @@ public class User implements Serializable, Comparable<User> {
 
     @Override
     public int compareTo(User o) {
-        return (int)(id - o.id);
+        return (int) (id - o.id);
     }
 
     @Override

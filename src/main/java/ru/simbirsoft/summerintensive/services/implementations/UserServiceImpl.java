@@ -8,6 +8,7 @@ import ru.simbirsoft.summerintensive.services.interfaces.UserService;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,5 +23,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return usersRepository.findByEmail(email).get();
+    }
+
+    @Override
+    public long countByCountry(String country) {
+        return usersRepository.countByCountry(country);
+    }
+
+    @Override
+    public long countByCity(String city) {
+        return usersRepository.countByCity(city);
+    }
+
+    @Override
+    public List<User>  findAll(){
+        return usersRepository.findAll();
     }
 }
